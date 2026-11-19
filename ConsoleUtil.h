@@ -39,11 +39,8 @@ namespace ConsoleUtil {
     // Khoi tao console (kich hoat ANSI mode tren Windows 10+, UTF-8)
     void khoiTaoConsole();
 
-    // --- Thao tac voi Con tro & Man hinh ---
+    // --- Thao tac voi Man hinh ---
     void xoaManHinh();
-    void datViTriConTro(int x, int y);
-    void anConTro();
-    void hienConTro();
 
     // --- Thiet lap Mau sac ---
     void datMau(Mau mauChu, Mau mauNen = Mau::MAC_DINH);
@@ -56,9 +53,6 @@ namespace ConsoleUtil {
     void inMau(const std::string& noiDung, Mau mau, bool xuongDong = true);
 
     // --- Khung & Giao dien (UI Elements) ---
-    // Ve duong gach ngang phan cach
-    void veDuongPhanCach(char ch = '=', int doDai = 0, Mau mau = Mau::XANH_LAM);
-
     // Ve Tieu de Banner dang hop dep mat
     void veTieuDe(const std::string& tieuDe, Mau mau = Mau::XANH_LAM_SANG);
 
