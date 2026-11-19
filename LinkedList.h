@@ -11,29 +11,22 @@
 *            trong class nay va giai phong trong destructor.
 **********************************************************/
 template <typename T>
-class LinkedList
-{
+class LinkedList{
 public:
 	LinkedList()
-		: _pHead(nullptr), _pTail(nullptr), _iSize(0)
-	{
-	}
+		: _pHead(nullptr), _pTail(nullptr), _iSize(0){ }
 
 	LinkedList(const LinkedList& other)
-		: _pHead(nullptr), _pTail(nullptr), _iSize(0)
-	{
+		: _pHead(nullptr), _pTail(nullptr), _iSize(0){
 		this->saoChep(other);
 	}
 
-	~LinkedList()
-	{
+	~LinkedList(){
 		this->xoaTatCa();
 	}
 
-	LinkedList& operator=(const LinkedList& other)
-	{
-		if (this != &other)
-		{
+	LinkedList& operator=(const LinkedList& other){
+		if (this != &other){
 			this->xoaTatCa();
 			this->saoChep(other);
 		}
@@ -43,13 +36,11 @@ public:
 	/**********************************************************
 	* @Description Them phan tu vao dau danh sach
 	**********************************************************/
-	void themDau(const T& data)
-	{
+	void themDau(const T& data){
 		Node<T>* pNew = new Node<T>(data);
 		pNew->setNext(this->_pHead);
 		this->_pHead = pNew;
-		if (this->_pTail == nullptr)
-		{
+		if (this->_pTail == nullptr){
 			this->_pTail = pNew;
 		}
 		++this->_iSize;
@@ -58,15 +49,12 @@ public:
 	/**********************************************************
 	* @Description Them phan tu vao cuoi danh sach
 	**********************************************************/
-	void themCuoi(const T& data)
-	{
+	void themCuoi(const T& data){
 		Node<T>* pNew = new Node<T>(data);
-		if (this->_pTail == nullptr)
-		{
+		if (this->_pTail == nullptr){
 			this->_pHead = pNew;
 		}
-		else
-		{
+		else{
 			this->_pTail->setNext(pNew);
 		}
 		this->_pTail = pNew;
@@ -78,12 +66,10 @@ public:
 	*
 	* @return true neu tim thay va xoa; false neu khong co
 	**********************************************************/
-	bool xoa(const T& data)
-	{
-		return this->xoaTheo([&data](const T& item)
-			{
+	bool xoa(const T& data){
+		return this->xoaTheo([&data](const T& item){
 				return item == data;
-			});
+		});
 	}
 
 	/**********************************************************
@@ -93,18 +79,15 @@ public:
 	* @attention pred la ham/lambda dang bool pred(const T&)
 	**********************************************************/
 	template <typename Predicate>
-	bool xoaTheo(Predicate pred)
-	{
+	bool xoaTheo(Predicate pred){
 		Node<T>* pPrev = nullptr;
 		Node<T>* pCurrent = this->_pHead;
-		while (pCurrent != nullptr && !pred(pCurrent->getData()))
-		{
+		while (pCurrent != nullptr && !pred(pCurrent->getData())){
 			pPrev = pCurrent;
 			pCurrent = pCurrent->getNext();
 		}
 
-		if (pCurrent == nullptr)
-		{
+		if (pCurrent == nullptr){
 			return false;
 		}
 		this->goNode(pPrev, pCurrent);
@@ -116,17 +99,14 @@ public:
 	*
 	* @return false neu vi tri khong hop le
 	**********************************************************/
-	bool xoaTheoViTri(int iViTri)
-	{
-		if (iViTri < 0 || iViTri >= this->_iSize)
-		{
+	bool xoaTheoViTri(int iViTri){
+		if (iViTri < 0 || iViTri >= this->_iSize){
 			return false;
 		}
 
 		Node<T>* pPrev = nullptr;
 		Node<T>* pCurrent = this->_pHead;
-		for (int iIndex = 0; iIndex < iViTri; ++iIndex)
-		{
+		for (int iIndex = 0; iIndex < iViTri; ++iIndex){
 			pPrev = pCurrent;
 			pCurrent = pCurrent->getNext();
 		}
@@ -139,12 +119,10 @@ public:
 	*
 	* @return Con tro toi phan tu trong danh sach, nullptr neu khong co
 	**********************************************************/
-	T* timKiem(const T& data) const
-	{
-		return this->timKiemTheo([&data](const T& item)
-			{
+	T* timKiem(const T& data) const{
+		return this->timKiemTheo([&data](const T& item){
 				return item == data;
-			});
+		});
 	}
 
 	/**********************************************************
@@ -154,12 +132,9 @@ public:
 	* @attention Vi du: timKiemTheo([&](const TheTu& t){ return t.getId() == strId; })
 	**********************************************************/
 	template <typename Predicate>
-	T* timKiemTheo(Predicate pred) const
-	{
-		for (Node<T>* pCurrent = this->_pHead; pCurrent != nullptr; pCurrent = pCurrent->getNext())
-		{
-			if (pred(pCurrent->getData()))
-			{
+	T* timKiemTheo(Predicate pred) const{
+		for (Node<T>* pCurrent = this->_pHead; pCurrent != nullptr; pCurrent = pCurrent->getNext()){
+			if (pred(pCurrent->getData())){
 				return &pCurrent->getData();
 			}
 		}
@@ -171,16 +146,13 @@ public:
 	*
 	* @return Con tro toi phan tu, nullptr neu vi tri khong hop le
 	**********************************************************/
-	T* layTai(int iViTri) const
-	{
-		if (iViTri < 0 || iViTri >= this->_iSize)
-		{
+	T* layTai(int iViTri) const{
+		if (iViTri < 0 || iViTri >= this->_iSize){
 			return nullptr;
 		}
 
 		Node<T>* pCurrent = this->_pHead;
-		for (int iIndex = 0; iIndex < iViTri; ++iIndex)
-		{
+		for (int iIndex = 0; iIndex < iViTri; ++iIndex){
 			pCurrent = pCurrent->getNext();
 		}
 		return &pCurrent->getData();
@@ -189,11 +161,9 @@ public:
 	/**********************************************************
 	* @Description Xoa toan bo phan tu, giai phong bo nho
 	**********************************************************/
-	void xoaTatCa()
-	{
+	void xoaTatCa(){
 		Node<T>* pCurrent = this->_pHead;
-		while (pCurrent != nullptr)
-		{
+		while (pCurrent != nullptr){
 			Node<T>* pNext = pCurrent->getNext();
 			delete pCurrent;
 			pCurrent = pNext;
@@ -203,13 +173,11 @@ public:
 		this->_iSize = 0;
 	}
 
-	int kichThuoc() const
-	{
+	int kichThuoc() const{
 		return this->_iSize;
 	}
 
-	bool rong() const
-	{
+	bool rong() const{
 		return this->_iSize == 0;
 	}
 
@@ -217,8 +185,7 @@ public:
 	* @Description Lay nut dau de duyet danh sach
 	* @attention Duyet: for (Node<T>* p = ds.getHead(); p != nullptr; p = p->getNext())
 	**********************************************************/
-	Node<T>* getHead() const
-	{
+	Node<T>* getHead() const{
 		return this->_pHead;
 	}
 
@@ -227,10 +194,8 @@ private:
 	Node<T>* _pTail;
 	int _iSize;
 
-	void saoChep(const LinkedList& other)
-	{
-		for (Node<T>* pCurrent = other._pHead; pCurrent != nullptr; pCurrent = pCurrent->getNext())
-		{
+	void saoChep(const LinkedList& other){
+		for (Node<T>* pCurrent = other._pHead; pCurrent != nullptr; pCurrent = pCurrent->getNext()){
 			this->themCuoi(pCurrent->getData());
 		}
 	}
@@ -239,19 +204,15 @@ private:
 	* @Description Go pCurrent khoi danh sach (pPrev la nut ngay truoc,
 	*              nullptr neu pCurrent la nut dau) roi delete
 	**********************************************************/
-	void goNode(Node<T>* pPrev, Node<T>* pCurrent)
-	{
-		if (pPrev == nullptr)
-		{
+	void goNode(Node<T>* pPrev, Node<T>* pCurrent){
+		if (pPrev == nullptr){
 			this->_pHead = pCurrent->getNext();
 		}
-		else
-		{
+		else{
 			pPrev->setNext(pCurrent->getNext());
 		}
 
-		if (pCurrent == this->_pTail)
-		{
+		if (pCurrent == this->_pTail){
 			this->_pTail = pPrev;
 		}
 
@@ -261,5 +222,3 @@ private:
 };
 
 #endif
-
-
