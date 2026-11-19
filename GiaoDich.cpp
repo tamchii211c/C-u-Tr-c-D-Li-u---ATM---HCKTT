@@ -74,7 +74,8 @@ GiaoDich::GiaoDich(const string& strId,
 	  _strIdDoiTac(strIdDoiTac), _strTenDoiTac(strTenDoiTac), _strThoiGian(strThoiGian){}
 
 string GiaoDich::getId() const{
-	return this->_strId;}
+	return this->_strId;
+}
 
 int GiaoDich::getLoai() const{
 	return this->_iLoai;
