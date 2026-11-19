@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 namespace ConsoleUtil {
 
     // Danh sach cac mau sac console co ban
@@ -48,35 +50,35 @@ namespace ConsoleUtil {
 
     // --- Dinh dang Van ban & Can le ---
     int layChieuRongConsole();
-    void inCanGiua(const std::string& noiDung, Mau mau = Mau::MAC_DINH);
-    void inCanPhai(const std::string& noiDung, Mau mau = Mau::MAC_DINH);
-    void inMau(const std::string& noiDung, Mau mau, bool xuongDong = true);
+    void inCanGiua(const string& noiDung, Mau mau = Mau::MAC_DINH);
+    void inCanPhai(const string& noiDung, Mau mau = Mau::MAC_DINH);
+    void inMau(const string& noiDung, Mau mau, bool xuongDong = true);
 
     // --- Khung & Giao dien (UI Elements) ---
     // Ve Tieu de Banner dang hop dep mat
-    void veTieuDe(const std::string& tieuDe, Mau mau = Mau::XANH_LAM_SANG);
+    void veTieuDe(const string& tieuDe, Mau mau = Mau::XANH_LAM_SANG);
 
     // Ve khung hop chua noi dung
-    void veKhung(const std::vector<std::string>& cacDong, const std::string& tieuDe = "", Mau mauVien = Mau::XANH_LAM);
+    void veKhung(const vector<string>& cacDong, const string& tieuDe = "", Mau mauVien = Mau::XANH_LAM);
 
     // --- Tien ich Nhap xuat (Input Utilities) ---
     // Dung man hinh va doi nguoi dung nhan Enter
-    void tamDung(const std::string& loiNhan = "Nhan Enter de tiep tuc...");
+    void tamDung(const string& loiNhan = "Nhan Enter de tiep tuc...");
 
     // Nhap mat khau / ma PIN an ki tu bang '*'
-    std::string nhapMatKhau(const std::string& loiNhan = "Nhap ma PIN: ", size_t doDaiToiDa = 0, bool chiChuSo = false);
+    string nhapMatKhau(const string& loiNhan = "Nhap ma PIN: ", size_t doDaiToiDa = 0, bool chiChuSo = false);
 
     // Hien thi thong bao dinh dang dep
-    void hienThongBao(const std::string& noiDung, LoaiThongBao loai);
-    void inLoi(const std::string& noiDung);
-    void inThanhCong(const std::string& noiDung);
-    void inThongBao(const std::string& noiDung);
-    void inLuaChon(const std::string& noiDung);
+    void hienThongBao(const string& noiDung, LoaiThongBao loai);
+    void inLoi(const string& noiDung);
+    void inThanhCong(const string& noiDung);
+    void inThongBao(const string& noiDung);
+    void inLuaChon(const string& noiDung);
 
     // Nhap du lieu an toan
-    long long nhapSoNguyen(const std::string& loiNhan = "");
-    std::string nhapDong(const std::string& loiNhan = "");
-    bool xacNhan(const std::string& loiNhan = "");
+    long long nhapSoNguyen(const string& loiNhan = "");
+    string nhapDong(const string& loiNhan = "");
+    bool xacNhan(const string& loiNhan = "");
 
 } // namespace ConsoleUtil
 
