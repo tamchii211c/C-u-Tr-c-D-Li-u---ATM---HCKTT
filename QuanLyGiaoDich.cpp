@@ -5,8 +5,7 @@
 
 using namespace std;
 
-namespace
-{
+namespace {
 	// File lich su nam o data/LichSu[ID].txt
 	const string THU_MUC_DATA = "data/";
 	const string TIEN_TO_LICH_SU = "LichSu";
@@ -20,27 +19,22 @@ namespace
 * @attention Danh sach cu bi xoa truoc khi doc. Neu file chua ton tai thi
 *            tao file rong va coi nhu lich su trong. Dong sai dinh dang bi bo qua.
 **********************************************************/
-bool QuanLyGiaoDich::docFile(const string& strId)
-{
+bool QuanLyGiaoDich::docFile(const string& strId){
 	this->_danhSach.xoaTatCa();
 
 	ifstream fileLichSu(QuanLyGiaoDich::layDuongDan(strId));
-	if (!fileLichSu.is_open())
-	{
+	if (!fileLichSu.is_open()){
 		return this->taoFileLichSu(strId);
 	}
 
 	string strDong;
-	while (getline(fileLichSu, strDong))
-	{
-		if (strDong.empty())
-		{
+	while (getline(fileLichSu, strDong)){
+		if (strDong.empty()){
 			continue;
 		}
 
 		GiaoDich giaoDich;
-		if (giaoDich.docTuDong(strDong))
-		{
+		if (giaoDich.docTuDong(strDong)){
 			this->_danhSach.themCuoi(giaoDich);
 		}
 	}
@@ -53,8 +47,7 @@ bool QuanLyGiaoDich::docFile(const string& strId)
 * @Description Them giao dich vao danh sach lien ket (chi trong bo nho)
 * @attention Muon luu xuong file phai goi them ghiThemChoId
 **********************************************************/
-void QuanLyGiaoDich::themGiaoDich(const GiaoDich& giaoDich)
-{
+void QuanLyGiaoDich::themGiaoDich(const GiaoDich& giaoDich){
 	this->_danhSach.themCuoi(giaoDich);
 }
 
@@ -116,30 +109,25 @@ bool QuanLyGiaoDich::taoFileLichSu(
 /**********************************************************
 * @Description In toan bo lich su giao dich dang tai trong danh sach
 **********************************************************/
-void QuanLyGiaoDich::hienThiTatCa() const
-{
-	if (this->_danhSach.rong())
-	{
+void QuanLyGiaoDich::hienThiTatCa() const{
+	if (this->_danhSach.rong()){
 		cout << " Chua co giao dich nao.\n";
 		return;
 	}
 
 	GiaoDich::hienThiTieuDeBang();
-	for (Node<GiaoDich>* pNode = this->_danhSach.getHead(); pNode != nullptr; pNode = pNode->getNext())
-	{
+	for (Node<GiaoDich>* pNode = this->_danhSach.getHead(); pNode != nullptr; pNode = pNode->getNext()){
 		pNode->getData().hienThi();
 	}
 }
 
-int QuanLyGiaoDich::kichThuoc() const
-{
+int QuanLyGiaoDich::kichThuoc() const{
 	return this->_danhSach.kichThuoc();
 }
 
 /**********************************************************
 * @Description Tao duong dan data/LichSu[ID].txt
 **********************************************************/
-string QuanLyGiaoDich::layDuongDan(const string& strId)
-{
+string QuanLyGiaoDich::layDuongDan(const string& strId){
 	return THU_MUC_DATA + TIEN_TO_LICH_SU + strId + DUOI_FILE;
 }
