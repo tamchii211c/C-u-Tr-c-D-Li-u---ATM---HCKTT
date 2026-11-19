@@ -9,34 +9,27 @@
 *            cap phat (new) va giai phong (delete) cac nut
 **********************************************************/
 template <typename T>
-class Node
-{
+class Node{
 public:
 	explicit Node(const T& data)
-		: _data(data), _pNext(nullptr)
-	{
-	}
+		: _data(data), _pNext(nullptr){}
 
 	Node(const Node&) = delete;
 	Node& operator=(const Node&) = delete;
 
-	T& getData()
-	{
+	T& getData(){
 		return this->_data;
 	}
 
-	const T& getData() const
-	{
+	const T& getData() const{
 		return this->_data;
 	}
 
-	Node<T>* getNext() const
-	{
+	Node<T>* getNext() const{
 		return this->_pNext;
 	}
 
-	void setNext(Node<T>* pNext)
-	{
+	void setNext(Node<T>* pNext){
 		this->_pNext = pNext;
 	}
 
@@ -46,5 +39,3 @@ private:
 };
 
 #endif
-
-
