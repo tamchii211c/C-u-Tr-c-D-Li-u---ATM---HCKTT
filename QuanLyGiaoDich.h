@@ -6,6 +6,8 @@
 #include "GiaoDich.h"
 #include "LinkedList.h"
 
+using namespace std;
+
 /**********************************************************
 * @Description Quan ly lich su giao dich bang danh sach lien ket.
 *              Danh sach trong bo nho la lich su cua MOT tai khoan
@@ -13,17 +15,17 @@
 **********************************************************/
 class QuanLyGiaoDich {
 public:
-    bool docFile(const std::string& strId);
+    bool docFile(const string& strId);
     void themGiaoDich(const GiaoDich& giaoDich);
-    bool ghiThemChoId(const std::string& strId, const GiaoDich& giaoDich) const;
-    bool taoFileLichSu(const std::string& strId) const;
+    bool ghiThemChoId(const string& strId, const GiaoDich& giaoDich) const;
+    bool taoFileLichSu(const string& strId) const;
     void hienThiTatCa() const;
     int kichThuoc() const;
 
 private:
     LinkedList<GiaoDich> _danhSach;
 
-    static std::string layDuongDan(const std::string& strId);
+    static string layDuongDan(const string& strId);
 };
 
 #endif
