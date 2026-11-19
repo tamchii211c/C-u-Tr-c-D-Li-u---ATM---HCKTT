@@ -5,6 +5,8 @@
 #include <cctype>
 #include "ConsoleUtil.h"
 
+using namespace std;
+
 static string trim(const string& strChuoi){
     size_t iDau = strChuoi.find_first_not_of(" \t\r\n");
     if (iDau == string::npos) return "";
@@ -254,7 +256,7 @@ bool QuanLyTheTu::themTaiKhoan(const string& strID, const string& strTenTaiKhoan
     ofstream fileLichSu(strDuongDanLichSu.c_str());
 
     if (!fileLichSu.is_open()){
-        std::remove(strDuongDanTaiKhoan.c_str());
+        remove(strDuongDanTaiKhoan.c_str());
         return false;
     }
 
@@ -282,8 +284,8 @@ bool QuanLyTheTu::themTaiKhoan(const string& strID, const string& strTenTaiKhoan
 
         this->_mapSoLanNhapSai.erase(strID);
 
-        std::remove(strDuongDanTaiKhoan.c_str());
-        std::remove(strDuongDanLichSu.c_str());
+        remove(strDuongDanTaiKhoan.c_str());
+        remove(strDuongDanLichSu.c_str());
 
         return false;
     }
