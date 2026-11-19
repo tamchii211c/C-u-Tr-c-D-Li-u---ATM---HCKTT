@@ -4,6 +4,8 @@
 #include "ConsoleUtil.h"
 #include <string>
 
+using namespace std;
+
 /**********************************************************
 * @Description Mot giao dich trong lich su cua mot tai khoan
 *              (ID chu so huu, loai, so tien, doi tac, thoi gian)
@@ -16,36 +18,36 @@
 class GiaoDich{
 public:
     GiaoDich();
-    GiaoDich(const std::string& strId,
+    GiaoDich(const string& strId,
              int iLoai,
              long long llSoTien,
-             const std::string& strIdDoiTac,
-             const std::string& strTenDoiTac,
-             const std::string& strThoiGian);
+             const string& strIdDoiTac,
+             const string& strTenDoiTac,
+             const string& strThoiGian);
 
-    std::string getId() const;
+    string getId() const;
     int getLoai() const;
     long long getSoTien() const;
-    std::string getIdDoiTac() const;
-    std::string getTenDoiTac() const;
-    std::string getThoiGian() const;
+    string getIdDoiTac() const;
+    string getTenDoiTac() const;
+    string getThoiGian() const;
 
-    std::string layTenLoai() const;
+    string layTenLoai() const;
     ConsoleUtil::Mau layMauLoai() const;
-    std::string chuyenThanhDong() const;
-    bool docTuDong(const std::string& strDong);
+    string chuyenThanhDong() const;
+    bool docTuDong(const string& strDong);
     void hienThi() const;
 
     static void hienThiTieuDeBang();
-    static std::string layThoiGianHienTai();
+    static string layThoiGianHienTai();
 
 private:
-    std::string _strId;
+    string _strId;
     int _iLoai;
     long long _llSoTien;
-    std::string _strIdDoiTac;
-    std::string _strTenDoiTac;
-    std::string _strThoiGian;
+    string _strIdDoiTac;
+    string _strTenDoiTac;
+    string _strThoiGian;
 };
 
 #endif
