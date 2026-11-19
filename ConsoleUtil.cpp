@@ -28,21 +28,6 @@ namespace ConsoleUtil {
         std::cout.flush();
     }
 
-    void datViTriConTro(int x, int y) {
-        std::cout << "\033[" << y << ";" << x << "H";
-        std::cout.flush();
-    }
-
-    void anConTro() {
-        std::cout << "\033[?25l";
-        std::cout.flush();
-    }
-
-    void hienConTro() {
-        std::cout << "\033[?25h";
-        std::cout.flush();
-    }
-
     void datMau(Mau mauChu, Mau mauNen) {
         int fgCode = 37;
         switch (mauChu) {
@@ -118,13 +103,6 @@ namespace ConsoleUtil {
 
         std::cout << std::string(pad, ' ');
         inMau(noiDung, mau, true);
-    }
-
-    void veDuongPhanCach(char ch, int doDai, Mau mau) {
-        int width = (doDai > 0) ? doDai : layChieuRongConsole();
-        datMau(mau);
-        std::cout << std::string(width, ch) << "\n";
-        datLaiMau();
     }
 
     void veTieuDe(const std::string& tieuDe, Mau mau) {
