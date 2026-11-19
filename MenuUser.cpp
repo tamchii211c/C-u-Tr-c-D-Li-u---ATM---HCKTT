@@ -351,17 +351,14 @@ void MenuUser::chuyenTien() {
         return;
     }
 
-    cout << "\n========================================\n";
-    cout << "           XAC NHAN GIAO DICH\n";
-    cout << "========================================\n";
-    cout << "Nguoi gui       : " << tkGui.getTenChuTaiKhoan() << '\n';
-    cout << "Nguoi nhan      : " << tkNhan.getTenChuTaiKhoan() << '\n';
-    cout << "ID nguoi nhan   : " << strIDNhan << '\n';
-    cout << "So tien chuyen  : " << llSoTien << " " << tkGui.getLoaiTienTe() << '\n';
-    cout << "So du sau GD    : "
-         <<fixed<< setprecision(0) << tkGui.getSoDu() - llSoTien << " "
-         << tkGui.getLoaiTienTe() << '\n';
-    cout << "========================================\n";
+    vector<string> chiTietXacNhan = {
+        "Nguoi gui       : " + tkGui.getTenChuTaiKhoan(),
+        "Nguoi nhan      : " + tkNhan.getTenChuTaiKhoan(),
+        "ID nguoi nhan   : " + strIDNhan,
+        "So tien chuyen  : " + to_string(llSoTien) + " " + tkGui.getLoaiTienTe(),
+        "So du sau GD    : " + to_string(static_cast<long long>(tkGui.getSoDu() - llSoTien)) + " " + tkGui.getLoaiTienTe()
+    };
+    ConsoleUtil::veKhung(chiTietXacNhan, "XAC NHAN GIAO DICH", ConsoleUtil::Mau::XANH_LAM_SANG);
 
 char cXacNhan;
     do {
