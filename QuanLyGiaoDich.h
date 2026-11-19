@@ -11,8 +11,7 @@
 *              Danh sach trong bo nho la lich su cua MOT tai khoan
 *              (tai bang docFile); file duoc ghi / doc theo tung ID.
 **********************************************************/
-class QuanLyGiaoDich
-{
+class QuanLyGiaoDich {
 public:
     bool docFile(const std::string& strId);
     void themGiaoDich(const GiaoDich& giaoDich);
