@@ -10,6 +10,8 @@
 #include <limits>
 #include <cctype>
 
+using namespace std;
+
 namespace ConsoleUtil {
     void khoiTaoConsole() {
         HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -24,8 +26,8 @@ namespace ConsoleUtil {
     }
 
     void xoaManHinh() {
-        std::cout << "\033[2J\033[H";
-        std::cout.flush();
+        cout << "\033[2J\033[H";
+        cout.flush();
     }
 
     void datMau(Mau mauChu, Mau mauNen) {
@@ -62,11 +64,11 @@ namespace ConsoleUtil {
             default:                   bgCode = 49; break;
         }
 
-        std::cout << "\033[" << fgCode << ";" << bgCode << "m";
+        cout << "\033[" << fgCode << ";" << bgCode << "m";
     }
 
     void datLaiMau() {
-        std::cout << "\033[0m";
+        cout << "\033[0m";
     }
 
     int layChieuRongConsole() {
@@ -78,65 +80,65 @@ namespace ConsoleUtil {
         return columns > 0 ? columns : 80;
     }
 
-    void inMau(const std::string& noiDung, Mau mau, bool xuongDong) {
+    void inMau(const string& noiDung, Mau mau, bool xuongDong) {
         datMau(mau);
-        std::cout << noiDung;
+        cout << noiDung;
         datLaiMau();
         if (xuongDong) {
-            std::cout << "\n";
+            cout << "\n";
         }
     }
 
-    void inCanGiua(const std::string& noiDung, Mau mau) {
+    void inCanGiua(const string& noiDung, Mau mau) {
         int width = layChieuRongConsole();
         int pad = (width - static_cast<int>(noiDung.length())) / 2;
         if (pad < 0) pad = 0;
 
-        std::cout << std::string(pad, ' ');
+        cout << string(pad, ' ');
         inMau(noiDung, mau, true);
     }
 
-    void inCanPhai(const std::string& noiDung, Mau mau) {
+    void inCanPhai(const string& noiDung, Mau mau) {
         int width = layChieuRongConsole();
         int pad = width - static_cast<int>(noiDung.length());
         if (pad < 0) pad = 0;
 
-        std::cout << std::string(pad, ' ');
+        cout << string(pad, ' ');
         inMau(noiDung, mau, true);
     }
 
-    void veTieuDe(const std::string& tieuDe, Mau mau) {
+    void veTieuDe(const string& tieuDe, Mau mau) {
         int width = layChieuRongConsole();
-        int boxWidth = std::min(width - 4, 70);
+        int boxWidth = min(width - 4, 70);
         if (boxWidth < 30) boxWidth = 30;
 
         int padLeft = (width - boxWidth) / 2;
         if (padLeft < 0) padLeft = 0;
-        std::string indent(padLeft, ' ');
+        string indent(padLeft, ' ');
 
         datMau(mau);
-        std::cout << indent << "+" << std::string(boxWidth - 2, '=') << "+\n";
+        cout << indent << "+" << string(boxWidth - 2, '=') << "+\n";
 
-        std::string titleStr = tieuDe;
+        string titleStr = tieuDe;
         if (static_cast<int>(titleStr.length()) > boxWidth - 4) {
             titleStr = titleStr.substr(0, boxWidth - 7) + "...";
         }
         int textPadLeft = (boxWidth - 2 - static_cast<int>(titleStr.length())) / 2;
         int textPadRight = boxWidth - 2 - static_cast<int>(titleStr.length()) - textPadLeft;
 
-        std::cout << indent << "|";
+        cout << indent << "|";
         datLaiMau();
-        std::cout << std::string(textPadLeft, ' ');
+        cout << string(textPadLeft, ' ');
         datMau(Mau::TRANG_SANG);
-        std::cout << titleStr;
+        cout << titleStr;
         datMau(mau);
-        std::cout << std::string(textPadRight, ' ') << "|\n";
+        cout << string(textPadRight, ' ') << "|\n";
 
-        std::cout << indent << "+" << std::string(boxWidth - 2, '=') << "+\n";
+        cout << indent << "+" << string(boxWidth - 2, '=') << "+\n";
         datLaiMau();
     }
 
-    void veKhung(const std::vector<std::string>& cacDong, const std::string& tieuDe, Mau mauVien) {
+    void veKhung(const vector<string>& cacDong, const string& tieuDe, Mau mauVien) {
         int maxLen = tieuDe.length() > 0 ? static_cast<int>(tieuDe.length()) + 4 : 0;
         for (const auto& line : cacDong) {
             if (static_cast<int>(line.length()) > maxLen) {
@@ -150,83 +152,83 @@ namespace ConsoleUtil {
 
         int padLeft = (consoleWidth - boxWidth) / 2;
         if (padLeft < 0) padLeft = 0;
-        std::string indent(padLeft, ' ');
+        string indent(padLeft, ' ');
 
         datMau(mauVien);
-        std::cout << indent << "+";
+        cout << indent << "+";
         if (!tieuDe.empty()) {
-            std::cout << "[ " << tieuDe << " ]" << std::string(boxWidth - 6 - tieuDe.length(), '-');
+            cout << "[ " << tieuDe << " ]" << string(boxWidth - 6 - tieuDe.length(), '-');
         } else {
-            std::cout << std::string(boxWidth - 2, '-');
+            cout << string(boxWidth - 2, '-');
         }
-        std::cout << "+\n";
+        cout << "+\n";
 
         for (const auto& line : cacDong) {
-            std::string text = line;
+            string text = line;
             if (static_cast<int>(text.length()) > boxWidth - 4) {
                 text = text.substr(0, boxWidth - 7) + "...";
             }
             int rightSpace = boxWidth - 4 - static_cast<int>(text.length());
 
             datMau(mauVien);
-            std::cout << indent << "| ";
+            cout << indent << "| ";
 
             size_t pos = text.find(':');
-            if (pos != std::string::npos) {
-                std::string strNhan = text.substr(0, pos + 1); // Phần nhãn (gồm dấu ':') -> Xanh lá sáng
-                std::string strGiaTri = text.substr(pos + 1);   // Phần giá trị -> Trắng sáng
+            if (pos != string::npos) {
+                string strNhan = text.substr(0, pos + 1); // Phần nhãn (gồm dấu ':') -> Xanh lá sáng
+                string strGiaTri = text.substr(pos + 1);   // Phần giá trị -> Trắng sáng
                 datMau(Mau::XANH_LA_SANG);
-                std::cout << strNhan;
+                cout << strNhan;
                 datMau(Mau::TRANG_SANG);
-                std::cout << strGiaTri;
+                cout << strGiaTri;
             } else {
                 datLaiMau();
-                std::cout << text;
+                cout << text;
             }
 
             datMau(mauVien);
-            std::cout << std::string(rightSpace, ' ') << " |\n";
+            cout << string(rightSpace, ' ') << " |\n";
         }
 
-        std::cout << indent << "+" << std::string(boxWidth - 2, '-') << "+\n";
+        cout << indent << "+" << string(boxWidth - 2, '-') << "+\n";
         datLaiMau();
     }
 
-    void tamDung(const std::string& loiNhan) {
-        std::cout << "\n";
+    void tamDung(const string& loiNhan) {
+        cout << "\n";
         inCanGiua(loiNhan, Mau::VANG_SANG);
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    std::string nhapMatKhau(const std::string& loiNhan, size_t doDaiToiDa, bool chiChuSo) {
-        std::cout << loiNhan;
-        std::string pass = "";
+    string nhapMatKhau(const string& loiNhan, size_t doDaiToiDa, bool chiChuSo) {
+        cout << loiNhan;
+        string pass = "";
         char ch;
         while ((ch = _getch()) != 13) {
             if (ch == 8) { 
                 if (!pass.empty()) {
                     pass.pop_back();
-                    std::cout << "\b \b";
+                    cout << "\b \b";
                 }
             } else if (ch >= 32 && ch <= 126) {
-                if (chiChuSo && !std::isdigit(static_cast<unsigned char>(ch))) {
+                if (chiChuSo && !isdigit(static_cast<unsigned char>(ch))) {
                     continue;
                 }
                 if (doDaiToiDa > 0 && pass.length() >= doDaiToiDa) {
                     continue;
                 }
                 pass.push_back(ch);
-                std::cout << '*';
+                cout << '*';
             }
         }
-        std::cout << "\n";
+        cout << "\n";
     
         return pass;
     }
 
-    void hienThongBao(const std::string& noiDung, LoaiThongBao loai) {
-        std::cout << "\n";
+    void hienThongBao(const string& noiDung, LoaiThongBao loai) {
+        cout << "\n";
         switch (loai) {
             case LoaiThongBao::THANH_CONG:
                 inCanGiua("[ THANH CONG ] " + noiDung, Mau::XANH_LA_SANG);
@@ -241,56 +243,56 @@ namespace ConsoleUtil {
                 inCanGiua("[ THONG TIN ] " + noiDung, Mau::XANH_LAM_SANG);
                 break;
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 
-    void inLoi(const std::string& noiDung) {
+    void inLoi(const string& noiDung) {
         hienThongBao(noiDung, LoaiThongBao::LOI);
     }
 
-    void inThanhCong(const std::string& noiDung) {
+    void inThanhCong(const string& noiDung) {
         hienThongBao(noiDung, LoaiThongBao::THANH_CONG);
     }
 
-    void inThongBao(const std::string& noiDung) {
+    void inThongBao(const string& noiDung) {
         hienThongBao(noiDung, LoaiThongBao::THONG_TIN);
     }
 
-    void inLuaChon(const std::string& noiDung) {
+    void inLuaChon(const string& noiDung) {
         inMau(noiDung, Mau::VANG_SANG, true);
     }
 
-    long long nhapSoNguyen(const std::string& loiNhan) {
+    long long nhapSoNguyen(const string& loiNhan) {
         if (!loiNhan.empty()) {
-            std::cout << loiNhan;
+            cout << loiNhan;
         }
         long long val;
-        while (!(std::cin >> val)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        while (!(cin >> val)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             inLoi("Gia tri nhap vao phai la so nguyen!");
             if (!loiNhan.empty()) {
-                std::cout << loiNhan;
+                cout << loiNhan;
             }
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return val;
     }
 
-    std::string nhapDong(const std::string& loiNhan) {
+    string nhapDong(const string& loiNhan) {
         if (!loiNhan.empty()) {
-            std::cout << loiNhan;
+            cout << loiNhan;
         }
-        std::string str;
-        std::getline(std::cin, str);
+        string str;
+        getline(cin, str);
         return str;
     }
 
-    bool xacNhan(const std::string& loiNhan) {
-        std::cout << loiNhan << " (Y/N): ";
+    bool xacNhan(const string& loiNhan) {
+        cout << loiNhan << " (Y/N): ";
         char ch;
-        std::cin >> ch;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin >> ch;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return (ch == 'y' || ch == 'Y');
     }
 
