@@ -34,8 +34,7 @@ namespace{
 		for (int iIndex = static_cast<int>(strSo.size()) - 1; iIndex >= 0; --iIndex){
 			strKetQua.insert(strKetQua.begin(), strSo[iIndex]);
 			++iDem;
-			if (iDem == MONEY_GROUP_SIZE && iIndex > 0)
-			{
+			if (iDem == MONEY_GROUP_SIZE && iIndex > 0){
 				strKetQua.insert(strKetQua.begin(), '.');
 				iDem = 0;
 			}
@@ -136,8 +135,7 @@ ConsoleUtil::Mau GiaoDich::layMauLoai() const {
 /**********************************************************
 * @Description Chuyen giao dich thanh mot dong de ghi vao file lich su
 **********************************************************/
-string GiaoDich::chuyenThanhDong() const
-{
+string GiaoDich::chuyenThanhDong() const{
 	ostringstream dongGhi;
 	dongGhi << this->_strId << DELIMITER
 			<< this->_iLoai << DELIMITER
@@ -182,8 +180,7 @@ bool GiaoDich::docTuDong(const string& strDong){
 	long long llSoTien = 0;
 	try{
 		iLoai = stoi(strLoai);
-		if (!laLoaiHopLe(iLoai))
-		{
+		if (!laLoaiHopLe(iLoai)){
 			return false;
 		}
 		llSoTien = stoll(strSoTien);
