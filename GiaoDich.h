@@ -13,8 +13,7 @@
 *            ID|Loai|SoTien|IdDoiTac|TenDoiTac|ThoiGian
 *            (rut tien khong co doi tac thi hai truong doi tac de trong)
 **********************************************************/
-class GiaoDich
-{
+class GiaoDich{
 public:
     GiaoDich();
     GiaoDich(const std::string& strId,
